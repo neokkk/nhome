@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "../../",
+    "experimentalDecorators": true,
+    "incremental": true,
+    "module": "NodeNext",
+    "outDir": "./dist",
+    "sourceMap": true,
+  },
+  "exclude": ["./test/**/*", "./src/**/*.test.ts"]
+}
