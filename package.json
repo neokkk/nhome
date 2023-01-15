@@ -1,11 +1,13 @@
 {
   "name": "nhome",
   "packageManager": "yarn@3.3.1",
+  "private": true,
   "scripts": {
     "lint": "eslint \"packages/**/*.ts\" --fix"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/server/lib/*"
   ],
   "devDependencies": {
     "@types/jest": "^29.2.5",

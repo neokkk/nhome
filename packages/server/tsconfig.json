@@ -1,12 +1,13 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "../../",
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "incremental": true,
     "module": "NodeNext",
     "outDir": "./dist",
-    "sourceMap": true,
+    "resolveJsonModule": true,
+    "target": "ESNext"
   },
+  "include": ["./src/**/*"],
   "exclude": ["./test/**/*", "./src/**/*.test.ts"]
 }

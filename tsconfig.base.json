@@ -2,11 +2,14 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "composite": true,
     "esModuleInterop": true,
+    "incremental": true,
     "moduleResolution": "Node",
     "noImplicitAny": true,
     "resolveJsonModule": true,
+    "sourceMap": true,
     "strict": true,
-    "target": "ESNext",
+    "target": "ESNext"
   }
 }
