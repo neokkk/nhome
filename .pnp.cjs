@@ -22,17 +22,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "server",\
         "reference": "workspace:packages/server"\
-      },\
-      {\
-        "name": "dht11",\
-        "reference": "workspace:packages/server/lib/dht11"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["client", ["workspace:packages/client"]],\
-      ["dht11", ["workspace:packages/server/lib/dht11"]],\
       ["nhome", ["workspace:."]],\
       ["server", ["workspace:packages/server"]]\
     ],\
@@ -4136,15 +4131,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["wrappy", "npm:1.0.2"]\
           ],\
           "linkType": "HARD"\
-        }]\
-      ]],\
-      ["dht11", [\
-        ["workspace:packages/server/lib/dht11", {\
-          "packageLocation": "./packages/server/lib/dht11/",\
-          "packageDependencies": [\
-            ["dht11", "workspace:packages/server/lib/dht11"]\
-          ],\
-          "linkType": "SOFT"\
         }]\
       ]],\
       ["diff", [\

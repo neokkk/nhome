@@ -3,6 +3,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { join } from 'path';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -11,6 +12,10 @@ async function bootstrap() {
     new FastifyAdapter({ logger: true }),
   );
 
+  app.useStaticAssets({
+    root: join(process.cwd(), 'log'),
+  });
+
   app.setViewEngine({
     engine: {
       handlebars: require('handlebars'),
@@ -18,6 +23,6 @@ async function bootstrap() {
     templates: './src/views',
   });
 
-  await app.listen(3000);
+  await app.listen(30000);
 }
 bootstrap();

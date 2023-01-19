@@ -6,14 +6,31 @@ export class AppService {
   constructor(private readonly fileService: FileService) {}
 
   async getDHT11Info() {
-    const lastLine = await this.fileService.getLastLine(
-      './lib/dht11/dht11.log',
+    const latestFileName = await this.fileService.getLatestFileName('./log');
+
+    let offset = 0;
+    let line = await this.fileService.getLastLine(
+      `./log/${latestFileName}`,
+      offset,
     );
-    const [, status, humidity, temperature] = lastLine
+
+    // prettier-ignore
+    while (this.#hasError(line)) {
+      ++offset;
+      line = await this.fileService.getLastLine(
+        `./log/${latestFileName}`,
+        offset,
+      );
+    }
+
+    const [datetime, , humidity, temperature] = line
       .replaceAll('\n', '')
       .split(' ');
 
-    if (status === 'error') return null;
-    return { humidity, temperature };
+    return { datetime, humidity, temperature };
+  }
+
+  #hasError(message: string) {
+    return !message || message.includes('error');
   }
 }
