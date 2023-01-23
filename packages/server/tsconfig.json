@@ -5,9 +5,7 @@
     "experimentalDecorators": true,
     "module": "NodeNext",
     "outDir": "./dist",
-    "resolveJsonModule": true,
-    "target": "ESNext"
   },
-  "include": ["./src/**/*"],
-  "exclude": ["./test/**/*", "./src/**/*.test.ts"]
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./src/**/*.test.ts"]
 }

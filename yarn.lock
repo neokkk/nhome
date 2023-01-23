@@ -1954,6 +1954,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"address@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "address@npm:1.2.2"
+  checksum: ace439960c1e3564d8f523aff23a841904bf33a2a7c2e064f7f60a064194075758b9690e65bd9785692a4ef698a998c57eb74d145881a1cecab8ba658ddb1607
+  languageName: node
+  linkType: hard
+
 "agent-base@npm:6, agent-base@npm:^6.0.2":
   version: 6.0.2
   resolution: "agent-base@npm:6.0.2"
@@ -6912,6 +6919,7 @@ __metadata:
     "@nestjs/schematics": ^9.0.4
     "@nestjs/testing": ^9.2.1
     "@types/supertest": ^2.0.12
+    address: ^1.2.2
     handlebars: ^4.7.7
     reflect-metadata: ^0.1.13
     rxjs: ^7.8.0

@@ -1,9 +1,11 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { join } from 'path';
+import address from 'address';
+import { resolve } from 'path';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -13,7 +15,7 @@ async function bootstrap() {
   );
 
   app.useStaticAssets({
-    root: join(process.cwd(), 'log'),
+    root: resolve(process.cwd(), 'src', 'assets'),
   });
 
   app.setViewEngine({
@@ -23,6 +25,11 @@ async function bootstrap() {
     templates: './src/views',
   });
 
-  await app.listen(30000);
+  await app.listen(30000, '0.0.0.0', (_, port) => {
+    Logger.log('================================================');
+    Logger.log(`  Server is listening on ${port}!`);
+    Logger.log(`  Current IP is: ${address.ip()}`);
+    Logger.log('================================================');
+  });
 }
 bootstrap();
