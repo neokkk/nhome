@@ -1,6 +1,9 @@
 FROM ubuntu:latest
 
-RUN apt update && apt install iputils-ping nginx vim -y
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Seoul
+
+RUN apt update && apt install nginx tzdata -y
 
 WORKDIR /etc/nginx
 COPY /nginx ./conf.d/

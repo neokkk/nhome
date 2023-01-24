@@ -13,3 +13,17 @@ services:
   server:
     build:
       dockerfile: ./docker/server.Dockerfile
+    volumes:
+      - dht11-log:/app/packages/log/dht11
+    
+  dht11:
+    build:
+      dockerfile: ./docker/dht11.Dockerfile
+    volumes:
+      - dht11-log:/app/log
+    privileged: true
+    tty: true
+
+volumes:
+  dht11-log:
+    external: true

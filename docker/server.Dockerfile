@@ -15,8 +15,6 @@ FROM installer as builder
 
 WORKDIR /app
 COPY packages/server/src ./packages/server/src
-COPY packages/server/lib ./packages/server/lib
-COPY packages/server/log ./packages/server/log
 COPY --from=installer ./app .
 
 EXPOSE 30000

@@ -48,12 +48,12 @@ char* itoa(int i) {
 
 int writeFile(char* message) {
   printf("%s\n", message);
-  char path[24] = "../../log/";
+  char path[30] = "./log/"; // 4
   char dateBuf[DATE_BUF_SIZE];
 
-  datetime(dateBuf, DATE_BUF_SIZE, "%Y%m%d");
+  datetime(dateBuf, DATE_BUF_SIZE, "%Y%m%d"); // 8
   strcat(path, dateBuf);
-  strcat(path, ".log");
+  strcat(path, ".log"); // 4
   printf("log file path is %s\n", path);
 
   int flag = O_RDWR | O_CREAT | O_APPEND;
