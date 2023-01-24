@@ -20,7 +20,7 @@ export class FileService {
 
     return new Promise((resolve, reject) => {
       exec(
-        `ls -t ${resolvedPath} | head -${1 + offset}`,
+        `ls -t ${resolvedPath} | head -${1 + offset} | tail -1`,
         (_, output, error) => {
           if (error) reject(error);
           else resolve(output);

@@ -17,7 +17,6 @@ export class AppService {
         offset,
       );
 
-      // prettier-ignore
       while (this.#hasError(line)) {
         ++offset;
         line = await this.fileService.getLastLine(

@@ -4,8 +4,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "NodeNext",
-    "outDir": "./dist",
+    "outDir": "./dist"
   },
   "include": ["./src/**/*.ts"],
-  "exclude": ["./src/**/*.test.ts"]
+  "exclude": ["./src/**/*.test.ts", "**/test/**", "./dist/**"]
 }
