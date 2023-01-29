@@ -25,9 +25,9 @@ async function bootstrap() {
     templates: './src/views',
   });
 
-  await app.listen(30000, '0.0.0.0', (_, port) => {
+  await app.listen(30001, '0.0.0.0', (_, addr) => {
     Logger.log('================================================');
-    Logger.log(`  Server is listening on ${port}!`);
+    Logger.log(`  Server is listening on ${addr}!`);
     Logger.log(`  Current IP is: ${address.ip()}`);
     Logger.log('================================================');
   });

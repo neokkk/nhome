@@ -1,9 +1,12 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
-  "rootDir": ".",
+  "moduleFileExtensions": ["hbs", "js", "json", "ts"],
+  "rootDir": "../",
   "testEnvironment": "node",
   "testRegex": ".e2e-test.ts$",
+  "testTimeout": 30000,
   "transform": {
+    "^.+\\.hbs$": "jest-handlebars",
     "^.+\\.(t|j)s$": "ts-jest"
-  }
+  },
+  "verbose": true
 }

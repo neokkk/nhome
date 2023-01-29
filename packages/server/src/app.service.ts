@@ -29,7 +29,11 @@ export class AppService {
         .replaceAll('\n', '')
         .split(' ');
 
-      return { datetime, humidity, temperature };
+      return {
+        datetime: datetime.replaceAll('T', ' '),
+        humidity,
+        temperature,
+      };
     } catch (error) {
       console.log('error');
       console.log(error);

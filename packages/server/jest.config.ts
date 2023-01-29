@@ -8,6 +8,7 @@ const config: Config = {
   rootDir: '.',
   testEnvironment: 'node',
   testRegex: '.*\\.test\\.ts$',
+  testTimeout: 30000,
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
