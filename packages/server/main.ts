@@ -5,19 +5,23 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import address from 'address';
+import fs from 'fs';
 import { resolve } from 'path';
-import { AppModule } from './app.module';
+import { AppModule } from './src/app.module';
 
 async function bootstrap() {
+  const httpsOptions = {
+    key: fs.readFileSync('private.key'),
+    cert: fs.readFileSync('private.crt'),
+  };
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({ logger: true }),
+    new FastifyAdapter({ https: httpsOptions, logger: true }),
   );
 
   app.useStaticAssets({
     root: resolve(process.cwd(), 'src', 'assets'),
   });
-
   app.setViewEngine({
     engine: {
       handlebars: require('handlebars'),
@@ -32,4 +36,5 @@ async function bootstrap() {
     Logger.log('================================================');
   });
 }
+
 bootstrap();

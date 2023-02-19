@@ -4,3 +4,8 @@ cmake_install.cmake
 
 dist/
 log/
+
+*.key
+*.pem
+*.csr
+*.crt

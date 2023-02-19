@@ -6,6 +6,6 @@
     "module": "NodeNext",
     "outDir": "./dist"
   },
-  "include": ["./src/**/*.ts"],
+  "include": ["./src/**/*.ts", "main.ts"],
   "exclude": ["./src/**/*.test.ts", "**/test/**", "./dist/**"]
 }
