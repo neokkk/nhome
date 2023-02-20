@@ -1,24 +1,28 @@
-FROM node:18-alpine as installer
+FROM node:18-alpine as builder
 
 WORKDIR /app
-COPY package.json tsconfig.base.json yarn.lock ./
-COPY .yarn ./.yarn
+COPY package.json tsconfig.base.json yarn.lock .yarnrc.yml ./
 
 WORKDIR /app/packages/server
-COPY packages/server/package.json packages/server/nest-cli.json packages/server/tsconfig.json packages/server/tsconfig.build.json ./
+COPY packages/server/package.json \
+  packages/server/nest-cli.json \
+  packages/server/tsconfig.* \
+  packages/server/main.ts \
+  packages/server/private.* \
+  ./
+COPY packages/server/src ./src
 
 WORKDIR /app
 RUN yarn set version berry
-RUN yarn install
+RUN yarn
+RUN yarn workspace server build
 
-FROM installer as builder
-
-WORKDIR /app
-COPY packages/server/src ./packages/server/src
-COPY --from=installer ./app .
+FROM builder
 
 EXPOSE 30000
 
-RUN yarn workspace server build
+WORKDIR /app/packages/server
 
-CMD yarn workspace server start:prod
+RUN chmod u+x ./dist/private.*
+
+CMD ["node", "./dist/main"]
