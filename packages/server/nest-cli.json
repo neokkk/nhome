@@ -3,7 +3,10 @@
   "collection": "@nestjs/schematics",
   "root": ".",
   "compilerOptions": {
-    "assets": [{ "include": "**/*.hbs", "watchAssets": true }],
+    "assets": [
+      { "include": "**/*.hbs", "outDir": "dist/src", "watchAssets": true },
+      { "include": "**/*.css", "outDir": "dist/src", "watchAssets": true }
+    ],
     "deleteOutDir": true,
     "tsConfigPath": "tsconfig.build.json"
   }

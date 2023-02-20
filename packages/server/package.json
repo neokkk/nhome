@@ -1,7 +1,7 @@
 {
   "name": "server",
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && cp private.crt private.key ./dist",
     "format": "prettier --write \"./src/**/*.ts\" \"./test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -33,7 +33,6 @@
     "@nestjs/cli": "^9.1.8",
     "@nestjs/schematics": "^9.0.4",
     "@nestjs/testing": "^9.2.1",
-    "@types/inline-css": "^3.0.1",
     "@types/jest": "^29.2.6",
     "@types/nodemailer": "^6.4.7",
     "@types/supertest": "^2.0.12",
