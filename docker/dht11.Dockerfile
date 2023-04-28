@@ -1,6 +1,8 @@
 FROM ubuntu:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG LIMIT_RANGE
+
 ENV TZ=Asia/Seoul
 
 RUN apt update && apt install make cmake gcc g++ git sudo tzdata -y
@@ -13,9 +15,9 @@ RUN git clone https://github.com/WiringPi/WiringPi.git
 RUN cd WiringPi && ./build
 
 WORKDIR /app
-COPY packages/lib/dht11/dht11.c packages/lib/dht11/Makefile packages/lib/dht11/CMakeLists.txt ./
+COPY packages/lib/dht11/dht11.c packages/lib/dht11/led.c packages/lib/dht11/CMakeLists.txt ./
 
 RUN cmake .
 RUN make
 
-CMD ["./dht11"]
+CMD ["./dht11", ${LIMIT_RANGE}]

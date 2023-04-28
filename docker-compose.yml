@@ -1,26 +1,28 @@
 version: "3.8"
 
 services:
-  proxy-server:
-    build:
-      dockerfile: ./docker/nginx.Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
-    privileged: true
-    tty: true
+  # proxy-server:
+  #   build:
+  #     dockerfile: ./docker/nginx.Dockerfile
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   privileged: true
+  #   tty: true
 
   server:
     build:
       dockerfile: ./docker/server.Dockerfile
+    ports:
+      - "30000:30000"
     volumes:
-      - dht11-log:/app/packages/log/dht11
+      - dht11-log:/var/log/dht11
     
   dht11:
     build:
       dockerfile: ./docker/dht11.Dockerfile
     volumes:
-      - dht11-log:/app/log
+      - dht11-log:/var/log/dht11
     privileged: true
     tty: true
 

@@ -13,9 +13,10 @@ COPY packages/server/package.json \
 COPY packages/server/src ./src
 
 WORKDIR /app
-RUN yarn set version berry
-RUN yarn
-RUN yarn workspace server build
+RUN apk add sudo
+RUN yarn set version berry &&\
+  yarn &&\
+  yarn workspace server build
 
 FROM builder
 
@@ -24,5 +25,6 @@ EXPOSE 30000
 WORKDIR /app/packages/server
 
 RUN chmod u+x ./dist/private.*
+RUN sudo -i mkdir /var/log/dht11 && sudo chmod 1777 /var/log/dht11
 
 CMD ["node", "./dist/main"]
