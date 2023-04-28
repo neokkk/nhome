@@ -29,6 +29,8 @@ export class AppController {
       //   template: 'warning',
       // });
     }
-    return dht11Info;
+    return {
+      dht11Info,
+    };
   }
 }

@@ -1,0 +1,14 @@
+<form method="POST" action="/limit_range">
+  <fieldset>
+    <legend>유효 온/습도 범위</legend>
+    <label for="humidity-low">최저 습도</label>
+    <input type="number" id="humidity-low" name="humidity-low" min="20" max="90" step="0.1">
+    <label for="humidity-high">최고 습도</label>
+    <input type="number" id="humidity-high" name="humidity-high" min="20" max="90" step="0.1">
+    <label for="temperature-low">최저 온도</label>
+    <input type="number" id="temperature-low" name="temperature-low" min="0" max="50" step="0.1">
+    <label for="temperature-high">최고 온도</label>
+    <input type="number" id="temperature-high" name="temperature-high" min="0" max="50" step="0.1">
+    <button type="submit">저장</button>
+  </fieldset>
+</form>

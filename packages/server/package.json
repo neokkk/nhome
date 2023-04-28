@@ -23,7 +23,7 @@
     "@nestjs/platform-fastify": "^9.2.1",
     "address": "^1.2.2",
     "fastify": "^4.12.0",
-    "handlebars": "^4.7.7",
+    "hbs": "^4.2.0",
     "nodemailer": "^6.9.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0"
@@ -33,6 +33,7 @@
     "@nestjs/cli": "^9.1.8",
     "@nestjs/schematics": "^9.0.4",
     "@nestjs/testing": "^9.2.1",
+    "@types/hbs": "^4.0.1",
     "@types/jest": "^29.2.6",
     "@types/nodemailer": "^6.4.7",
     "@types/supertest": "^2.0.12",

@@ -6,6 +6,7 @@ import {
 } from '@nestjs/platform-fastify';
 import address from 'address';
 import fs from 'fs';
+import hbs from 'hbs';
 import { resolve } from 'path';
 import { AppModule } from './src/app.module';
 
@@ -24,10 +25,12 @@ async function bootstrap() {
   });
   app.setViewEngine({
     engine: {
-      handlebars: require('handlebars'),
+      handlebars: hbs,
     },
     templates: './src/views',
   });
+
+  hbs.registerPartials(resolve(process.cwd(), './src', 'views', 'partials'));
 
   await app.listen(30000, '0.0.0.0', (_, addr) => {
     Logger.log('================================================');

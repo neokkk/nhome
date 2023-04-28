@@ -8,8 +8,7 @@
   <title>My Home</title>
 </head>
 <body>
-  <p>Last measured date {{ datetime }}</p>
-  <p>Humidity: {{ humidity }}%</p>
-  <p>Temperature: {{ temperature }}°C</p>
+  {{> dht11Info}}
+  {{> limit}}
 </body>
 </html>

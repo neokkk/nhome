@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DHT11 } from '../../entities/sensor/dht11.entity';
 import { FileService } from './file.service';
 
-const LOG_PATH = '../log/dht11';
+const LOG_PATH = '/var/log/dht11';
 
 @Injectable()
 export class SensorService {
