@@ -63,13 +63,13 @@ char* itoa(int i) {
 
 int writeFile(char* message) {
   printf("%s\n", message);
-  char path[30] = "./log/"; // 4-bit
+  char path[30] = "/var/log/dht11/"; // 16-bit
   char dateBuf[DATE_BUF_SIZE];
 
   datetime(dateBuf, DATE_BUF_SIZE, "%Y%m%d"); // 8-bit
   strcat(path, dateBuf);
   strcat(path, ".log"); // 4-bit
-  // printf("log file path is %s\n", path);
+  printf("log file path is %s\n", path);
 
   int flag = O_RDWR | O_CREAT | O_APPEND;
   int fd;
@@ -160,14 +160,28 @@ void reset(int* data, int limit) {
   while (i < limit) data[i++] = 0;
 }
 
-int valid(int* data, int* limit) {
+bool valid(int* data, int* limit) {
   float humidity = data[0] + data[1] * 0.1;
   float temperature = data[2] + data[3] * 0.1;
 
-  int valid = (humidity >= limit[0] && humidity <= limit[1]) &&
+  bool valid = (humidity >= limit[0] && humidity <= limit[1]) &&
     (temperature >= limit[2] && temperature <= limit[3]);
 
   return valid;
+}
+
+void mailWarning(int* data) {
+  char commandBuf[30] = "./warning.sh ";
+
+  strcat(commandBuf, itoa(data[0]));
+  strcat(commandBuf, ".");
+  strcat(commandBuf, itoa(data[1]));
+  strcat(commandBuf, " ");
+  strcat(commandBuf, itoa(data[2]));
+  strcat(commandBuf, ".");
+  strcat(commandBuf, itoa(data[3]));
+
+  system(commandBuf);
 }
 
 void setNormal() {
@@ -205,12 +219,14 @@ int main(int argc, char** argv) {
       logTime(data, false);
     } else {
       if (valid(data, limit)) setNormal();
-      else setWarning();
+      else {
+        setWarning();
+        mailWarning(data);
+      }
       logTime(data, true);
     }
 
     reset(data, 5);
-    delay(1000 * 10); // 10 sec cycle
-    // delay(1000 * 60 * 5); // 5 minute cycle
+    delay(1000 * 60 * 5); // 5 minute cycle
   }
 }
