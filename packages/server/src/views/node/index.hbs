@@ -1,0 +1,22 @@
+{{#> layout title=" - node"}}
+{{/layout}}
+
+<h1>Sensor Data</h1>
+<div id="sensorData"></div>
+
+<script>
+  const socket = new WebSocket('ws://localhost:81');
+
+  socket.addEventListener('open', (event) => {
+    console.log('Connected to WebSocket server');
+  });
+
+  socket.addEventListener('message', (event) => {
+    const data = JSON.parse(event.data);
+    console.log(data);
+    if (data.__type === 'sensor') {
+      const sensorDataDiv = document.getElementById('sensorData');
+      sensorDataDiv.textContent = `Temperature: ${data.temp}, Pressure: ${data.press}`;
+    }
+  });
+</script>

@@ -4,11 +4,11 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "incremental": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ESNext"
+    "target": "esnext"
   }
 }

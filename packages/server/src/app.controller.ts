@@ -5,6 +5,8 @@ import { SensorService } from './common/services/sensor.service';
 
 @Controller()
 export class AppController {
+  private logger: Logger = new Logger('App');
+
   constructor(
     private readonly sensorService: SensorService,
     private readonly mailService: MailService,
@@ -15,16 +17,16 @@ export class AppController {
   async index(@Req() req: FastifyRequest) {
     const { headers } = req;
 
-    Logger.log('GET /');
-    Logger.log(`Request host is ${headers['host']}`);
-    Logger.log(`Request user agent is ${headers['user-agent']}`);
+    this.logger.log('GET /');
+    this.logger.log(`Request host is ${headers['host']}`);
+    this.logger.log(`Request user agent is ${headers['user-agent']}`);
 
     const dht11Info = await this.sensorService.getDHT11Info();
     if (!dht11Info) return;
 
     const { invalid, message } = dht11Info.isInvalid();
     if (invalid) {
-      Logger.error(`Invalid Range Error ${message}`);
+      this.logger.error(`Invalid Range Error ${message}`);
       // this.mailService.sendMail({
       //   template: 'warning',
       // });

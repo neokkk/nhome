@@ -3,8 +3,11 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "NodeNext",
-    "outDir": "./dist"
+    "lib": ["dom", "es2021"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": "./dist",
+    "strictPropertyInitialization": false
   },
   "include": ["./src/**/*.ts", "main.ts"],
   "exclude": ["./src/**/*.test.ts", "**/test/**", "./dist/**"]

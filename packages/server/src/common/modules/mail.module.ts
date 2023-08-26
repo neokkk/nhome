@@ -18,7 +18,7 @@ import { MailService } from '../services/mail.service';
         },
       },
       defaults: {
-        from: '"No Reply" <no-reply@neokkk.sendtrid.com>',
+        from: '"No Reply" <no-reply@neokkk.sendgrid.com>',
       },
       preview: true,
       template: {

@@ -8,8 +8,7 @@ type MailOptions = ISendMailOptions & {
 
 @Injectable()
 export class MailService {
-  constructor(private readonly mailerService: MailerService) {
-  }
+  constructor(private readonly mailerService: MailerService) {}
 
   sendMail(mailOptions: MailOptions) {
     return this.mailerService.sendMail(mailOptions);
