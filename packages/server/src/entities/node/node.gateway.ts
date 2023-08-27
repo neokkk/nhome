@@ -28,7 +28,7 @@ export class NodeGateway {
     });
   }
 
-  sendSensorData(data: any) {
+  sendData(data: any) {
     if (!this.server) return;
 
     this.server.clients.forEach((client) => {

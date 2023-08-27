@@ -1,0 +1,47 @@
+#node {
+  max-width: 1024px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #efefef;
+  display: grid;
+  grid-template-columns: auto 1fr minmax(120px, auto);
+  gap: 20px;
+}
+
+#node > img {
+  object-fit: contain;
+}
+
+#node input {
+  border: none;
+  border-radius: 4px;
+  padding: 4px 16px;
+}
+
+#node button {
+  color: white;
+  border: none;
+  border-radius: 4px;
+  background-color: #262626;
+  padding: 4px 16px;
+  cursor: pointer;
+}
+
+#engine > label {
+  display: block;
+  margin: 4px 0;
+}
+
+.system-unit {
+  margin: 8px 0;
+}
+
+@media (max-width: 765px) {
+  #node {
+    grid-template-columns: 1fr;
+  }
+
+  #node > img {
+    width: 100%;
+  }
+}

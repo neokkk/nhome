@@ -1,8 +1,58 @@
 {{#> layout title=" - node"}}
 {{/layout}}
 
-<h1>Sensor Data</h1>
-<div id="sensorData"></div>
+<div id="node">
+  <img src="https://download.logo.wine/logo/Raspberry_Pi/Raspberry_Pi-Logo.wine.png" width="300" alt="raspberrypi">
+
+  <div id="system">
+    <p>[System]</p>
+    <p>Name: <span id="system-name"></span></p>
+    <p>Cores: <span id="system-cores"></span></p>
+
+    <div id="process" class="system-unit">
+      <p>[Process]</p>
+      <p>Total: <span id="process-total"></span></p>
+      <p>Running: <span id="process-running"></span></p>
+      <p>Load average: <span id="process-load-avg"></span></p>
+    </div>
+
+    <div id="memory" class="system-unit">
+      <p>[Memory]</p>
+      <p>Total: <span id="memory-total"></span>KB</p>
+      <p>Available: <span id="memory-available"></span>KB</p>
+      <p>Active: <span id="memory-active"></span>KB</p>
+      <p>Inactive: <span id="memory-inactive"></span>KB</p>
+      <p>Swapped: <span id="memory-swapped"></span>KB</p>
+      <p>Mapped: <span id="memory-mapped"></span>KB</p>
+    </div>
+
+    <div id="disk" class="system-unit">
+      <p>[Disk]</p>
+      <p>Mount Point: <span id="disk-mount"></span></p>
+      <p>Total: <span id="disk-total"></span>KB</p>
+      <p>Used: <span id="disk-used"></span>KB</p>
+    </div>
+
+    <div id="engine" class="system-unit">
+      <p>[Engine]</p>
+      <label>
+        <span>Motor 1 </span>
+        <input type="number" name="motor_1" id="motor_1">
+      </label>
+      <label>
+        <span>Motor 2 </span>
+        <input type="number" name="motor_2" id="motor_2">
+      </label>
+      <button>Set</button>
+    </div>
+  </div>
+  
+  <div id="sensor">
+    <p>[Sensor]</p>
+    <p>Temperature: <span id="sensor-temp"></span>°C</p>
+    <p>Pressure: <span id="sensor-press"></span>hPa</p>
+  </div>
+</div>
 
 <script>
   const socket = new WebSocket('ws://localhost:81');
@@ -12,11 +62,37 @@
   });
 
   socket.addEventListener('message', (event) => {
+    if (!event?.data) return;
     const data = JSON.parse(event.data);
     console.log(data);
     if (data.__type === 'sensor') {
-      const sensorDataDiv = document.getElementById('sensorData');
-      sensorDataDiv.textContent = `Temperature: ${data.temp}, Pressure: ${data.press}`;
+      document.getElementById('sensor-temp').textContent = data.temp;
+      document.getElementById('sensor-press').textContent = data.press;
+    }
+
+    if (data.__type === 'system') {
+      const systemDiv = document.getElementById('system');
+      document.getElementById('system-name').textContent = data.name;
+      document.getElementById('system-cores').textContent = data.cores;
+
+      document.getElementById('motor_1').value = data.motor1;
+      document.getElementById('motor_2').textContent = data.motor1;
+      document.getElementById('motor_2').value = data.motor2;
+
+      document.getElementById('process-total').textContent = data.process.total;
+      document.getElementById('process-running').textContent = data.process.running;
+      document.getElementById('process-load-avg').textContent = `${data.process.load_avg_for_1}, ${data.process.load_avg_for_5}`;
+
+      document.getElementById('memory-total').textContent = data.memory.total;
+      document.getElementById('memory-available').textContent = data.memory.available;
+      document.getElementById('memory-active').textContent = data.memory.active;
+      document.getElementById('memory-inactive').textContent = data.memory.inactive;
+      document.getElementById('memory-swapped').textContent = data.memory.swapped;
+      document.getElementById('memory-mapped').textContent = data.memory.mapped;
+      
+      document.getElementById('disk-mount').textContent = data.disk.mount;
+      document.getElementById('disk-total').textContent = data.disk.total;
+      document.getElementById('disk-used').textContent = data.disk.used;
     }
   });
 </script>
