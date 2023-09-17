@@ -36,14 +36,16 @@
     <div id="engine" class="system-unit">
       <p>[Engine]</p>
       <label>
-        <span>Motor 1 </span>
-        <input type="number" name="motor_1" id="motor_1">
+        <p>Motor 1</p>
+        <p>Speed: <span id="motor1-speed-output"></span></p>
+        <input type="number" name="motor_1" id="motor1-speed-input" min="1" max="20000">
       </label>
       <label>
-        <span>Motor 2 </span>
-        <input type="number" name="motor_2" id="motor_2">
+        <p>Motor 2</p>
+        <p>Speed: <span id="motor2-speed-output"></span></p>
+        <input type="number" name="motor_2" id="motor2-speed-input" min="1" max="20000">
       </label>
-      <button>Set</button>
+      <button id="btn-change-motor-speed">Set</button>
     </div>
   </div>
   
@@ -75,9 +77,8 @@
       document.getElementById('system-name').textContent = data.name;
       document.getElementById('system-cores').textContent = data.cores;
 
-      document.getElementById('motor_1').value = data.motor1;
-      document.getElementById('motor_2').textContent = data.motor1;
-      document.getElementById('motor_2').value = data.motor2;
+      document.getElementById('motor1-speed-output').textContent = data.engine.motor_1_speed;
+      document.getElementById('motor2-speed-output').textContent = data.engine.motor_2_speed;
 
       document.getElementById('process-total').textContent = data.process.total;
       document.getElementById('process-running').textContent = data.process.running;
@@ -94,5 +95,31 @@
       document.getElementById('disk-total').textContent = data.disk.total;
       document.getElementById('disk-used').textContent = data.disk.used;
     }
+  });
+
+  document.getElementById('btn-change-motor-speed').addEventListener('click', () => {
+    const motor1SpeedInput = document.getElementById('motor1-speed-input').value;
+    const motor1SpeedOutput = document.getElementById('motor1-speed-output').value;
+    const motor2SpeedInput = document.getElementById('motor2-speed-input').value;
+    const motor2SpeedOutput = document.getElementById('motor2-speed-output').value;
+
+    if (motor1SpeedInput !== '' && motor1SpeedInput !== motor1SpeedOutput) {
+      socket.send(JSON.stringify({
+        __type: 'engine',
+        num: 1,
+        speed: motor1SpeedInput * 1,
+      }));
+    }
+
+    if (motor2SpeedInput !== '' && motor2SpeedInput !== motor2SpeedOutput) {
+      socket.send(JSON.stringify({
+        __type: 'engine',
+        num: 2,
+        speed: motor2SpeedInput * 1,
+      }));
+    }
+
+    document.getElementById('motor1-speed-input').value = '';
+    document.getElementById('motor2-speed-input').value = '';
   });
 </script>
