@@ -31,7 +31,6 @@ const bootstrap = async () => {
     },
     templates: './src/views',
   });
-  app.useWebSocketAdapter(new WsAdapter(app));
 
   hbs.registerPartials(resolve(process.cwd(), './src', 'views', 'partials'));
 

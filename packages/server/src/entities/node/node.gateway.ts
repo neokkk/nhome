@@ -10,7 +10,7 @@ export class NodeGateway {
 
   constructor() {
     this.mqc = connect('mqtt://0.0.0.0:1883');
-    this.wss = new WebSocketServer({ port: 81 });
+    this.wss = new WebSocketServer({ port: 30010 });
 
     this.setMqttEvents();
     this.setWebsocketEvents();
